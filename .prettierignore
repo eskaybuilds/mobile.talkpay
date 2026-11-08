@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.nx
+.expo
+apps/*/ios
+apps/*/android
+package-lock.json
+libs/**/src/generated

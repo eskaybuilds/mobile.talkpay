@@ -1,0 +1,35 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "channel": "development",
+      "distribution": "internal",
+      "environment": "development"
+    },
+    "debug": {
+      "extends": "development",
+      "developmentClient": true
+    },
+    "internal": {
+      "extends": "development"
+    },
+    "staging": {
+      "channel": "staging",
+      "distribution": "internal",
+      "autoIncrement": true,
+      "environment": "preview"
+    },
+    "production": {
+      "channel": "production",
+      "distribution": "store",
+      "autoIncrement": true,
+      "environment": "production"
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

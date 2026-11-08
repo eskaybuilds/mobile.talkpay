@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.base.json",
+  "//": "Root program for the repo-wide typecheck (npm run typecheck / CI).",
+  "include": ["apps/**/*.ts", "apps/**/*.tsx", "libs/**/*.ts", "libs/**/*.tsx", "types.d.ts"],
+  "exclude": ["node_modules", "dist", "**/.expo", "**/ios", "**/android", "**/*.cjs", "**/*.mjs"]
+}

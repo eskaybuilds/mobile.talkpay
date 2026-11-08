@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # secure-auth is a sibling repo linked with file:. CI checks it out next to this repo.
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/secure-auth.talkpay
+          path: secure-auth.talkpay
+      - run: mv secure-auth.talkpay ../secure-auth.talkpay
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test -- --ci

@@ -1,0 +1,26 @@
+[
+  {
+    "sourceTag": "type:app",
+    "onlyDependOnLibsWithTags": ["type:features", "type:ui", "type:data-access", "type:utils"]
+  },
+  {
+    "sourceTag": "type:features",
+    "onlyDependOnLibsWithTags": ["type:features", "type:ui", "type:data-access", "type:utils"]
+  },
+  {
+    "sourceTag": "type:ui",
+    "onlyDependOnLibsWithTags": ["type:ui", "type:utils"]
+  },
+  {
+    "sourceTag": "type:data-access",
+    "onlyDependOnLibsWithTags": ["type:data-access", "type:utils"]
+  },
+  {
+    "sourceTag": "type:utils",
+    "onlyDependOnLibsWithTags": ["type:utils"]
+  },
+  {
+    "sourceTag": "scope:shared",
+    "onlyDependOnLibsWithTags": ["scope:shared"]
+  }
+]
