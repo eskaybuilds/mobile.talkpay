@@ -24,7 +24,8 @@
     "types": ["jest", "node"],
     "paths": {
       "@talkpay/shared/utils/app-env": ["./libs/shared/utils/app-env/src/index.ts"],
-      "@talkpay/shared/ui/styles": ["./libs/shared/ui/styles/src/index.ts"]
+      "@talkpay/shared/ui/styles": ["./libs/shared/ui/styles/src/index.ts"],
+      "@talkpay/shared/ui/ui-kit": ["./libs/shared/ui/ui-kit/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

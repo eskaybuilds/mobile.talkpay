@@ -1,26 +1,24 @@
-import { Text, View } from 'react-native';
+import { Screen, Text } from '@talkpay/shared/ui/ui-kit';
+import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
+// Phase 0 placeholder, not a designed screen: it becomes the health check once the API client exists.
 export default function HomeRoute() {
   return (
-    <View style={styles.screen}>
-      <Text accessibilityRole='header' style={styles.banner}>
-        TEST MODE ONLY
-      </Text>
-      <Text style={styles.body}>TalkPay runs against the Korapay sandbox. No real money.</Text>
-    </View>
+    <Screen>
+      <View style={styles.body}>
+        <Text variant='title1' accessibilityRole='header'>
+          TalkPay
+        </Text>
+        <Text color='textSecondary' style={styles.centred}>
+          TalkPay runs against the Korapay sandbox. No real money.
+        </Text>
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.layout.gutter,
-    gap: theme.space.space2,
-    backgroundColor: theme.colors.background,
-  },
-  banner: { ...theme.type.title2, color: theme.colors.warning },
-  body: { ...theme.type.body, color: theme.colors.textSecondary, textAlign: 'center' },
+  body: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: theme.space.space2 },
+  centred: { textAlign: 'center' },
 }));
