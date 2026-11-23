@@ -24,6 +24,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      # npm runs a file: dependency's prepare script (tsc), which needs secure-auth's own devDependencies.
+      - run: npm ci
+        working-directory: ../secure-auth.talkpay
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint

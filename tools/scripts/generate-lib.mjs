@@ -102,6 +102,9 @@ if (kind === 'data') {
   writeFileSync(join(directory, 'src/index.ts'), '');
 }
 
+// JSON.stringify lays out arrays differently from prettier, so the rewritten project.json fails --check.
+execSync(`npx prettier --write --log-level warn ${directory}`, { stdio: 'inherit' });
+
 console.log(`\nGenerated ${generator} at ${directory}`);
 console.log(`  name:       ${relative}`);
 console.log(`  importPath: ${importPath}`);

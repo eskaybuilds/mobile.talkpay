@@ -22,7 +22,9 @@
     "baseUrl": ".",
     "rootDir": ".",
     "types": ["jest", "node"],
-    "paths": {}
+    "paths": {
+      "@talkpay/shared/utils/app-env": ["./libs/shared/utils/app-env/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
