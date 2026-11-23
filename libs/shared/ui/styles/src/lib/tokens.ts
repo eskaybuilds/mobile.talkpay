@@ -81,21 +81,48 @@ export const darkElevation: ElevationTokens = {
 
 const tabularNums: TextStyle['fontVariant'] = ['tabular-nums'];
 
+// Each weight is its own embedded file, named after its PostScript name so iOS and Android agree. fontWeight is
+// left unset: Android would try to re-weight an already weighted face.
+export const fontFamily = {
+  regular: 'Inter-Regular',
+  medium: 'Inter-Medium',
+  semiBold: 'Inter-SemiBold',
+  bold: 'Inter-Bold',
+};
+
 // letterSpacing is in points: tokens.md gives em, so each value is em × fontSize.
 export const type = {
-  amountDisplay: { fontSize: 40, lineHeight: 48, fontWeight: '600', fontVariant: tabularNums, letterSpacing: -0.8 },
-  amountDisplayMinor: { fontSize: 24, lineHeight: 48, fontWeight: '500', fontVariant: tabularNums },
-  amountLarge: { fontSize: 32, lineHeight: 40, fontWeight: '600', fontVariant: tabularNums, letterSpacing: -0.64 },
-  amountRow: { fontSize: 16, lineHeight: 22, fontWeight: '600', fontVariant: tabularNums },
-  title1: { fontSize: 28, lineHeight: 34, fontWeight: '700', letterSpacing: -0.56 },
-  title2: { fontSize: 22, lineHeight: 28, fontWeight: '600', letterSpacing: -0.22 },
-  headline: { fontSize: 17, lineHeight: 24, fontWeight: '600' },
-  body: { fontSize: 16, lineHeight: 24, fontWeight: '400' },
-  bodyStrong: { fontSize: 16, lineHeight: 24, fontWeight: '600' },
-  callout: { fontSize: 15, lineHeight: 22, fontWeight: '400' },
-  label: { fontSize: 13, lineHeight: 18, fontWeight: '500' },
-  caption: { fontSize: 12, lineHeight: 16, fontWeight: '500' },
-  overline: { fontSize: 11, lineHeight: 16, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.66 },
+  amountDisplay: {
+    fontSize: 40,
+    lineHeight: 48,
+    fontFamily: fontFamily.semiBold,
+    fontVariant: tabularNums,
+    letterSpacing: -0.8,
+  },
+  amountDisplayMinor: { fontSize: 24, lineHeight: 48, fontFamily: fontFamily.medium, fontVariant: tabularNums },
+  amountLarge: {
+    fontSize: 32,
+    lineHeight: 40,
+    fontFamily: fontFamily.semiBold,
+    fontVariant: tabularNums,
+    letterSpacing: -0.64,
+  },
+  amountRow: { fontSize: 16, lineHeight: 22, fontFamily: fontFamily.semiBold, fontVariant: tabularNums },
+  title1: { fontSize: 28, lineHeight: 34, fontFamily: fontFamily.bold, letterSpacing: -0.56 },
+  title2: { fontSize: 22, lineHeight: 28, fontFamily: fontFamily.semiBold, letterSpacing: -0.22 },
+  headline: { fontSize: 17, lineHeight: 24, fontFamily: fontFamily.semiBold },
+  body: { fontSize: 16, lineHeight: 24, fontFamily: fontFamily.regular },
+  bodyStrong: { fontSize: 16, lineHeight: 24, fontFamily: fontFamily.semiBold },
+  callout: { fontSize: 15, lineHeight: 22, fontFamily: fontFamily.regular },
+  label: { fontSize: 13, lineHeight: 18, fontFamily: fontFamily.medium },
+  caption: { fontSize: 12, lineHeight: 16, fontFamily: fontFamily.medium },
+  overline: {
+    fontSize: 11,
+    lineHeight: 16,
+    fontFamily: fontFamily.semiBold,
+    textTransform: 'uppercase',
+    letterSpacing: 0.66,
+  },
 } satisfies Record<string, TextStyle>;
 
 export const space = {

@@ -25,6 +25,7 @@
     "expo": "*",
     "expo-constants": "*",
     "expo-dev-client": "*",
+    "expo-font": "*",
     "expo-linking": "*",
     "expo-router": "*",
     "expo-splash-screen": "*",
