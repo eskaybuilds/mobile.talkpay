@@ -1,0 +1,8 @@
+{
+  "name": "talkpay",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/talkpay",
+  "projectType": "application",
+  "tags": ["type:app"],
+  "targets": {}
+}

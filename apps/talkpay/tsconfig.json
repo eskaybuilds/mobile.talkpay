@@ -1,5 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Expo resolves the @talkpay/* paths against this file, so the workspace root is restated as the base.
+    "baseUrl": "../.."
+  },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "../../types.d.ts"],
   "exclude": ["node_modules", "ios", "android"]
 }
