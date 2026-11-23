@@ -11,3 +11,7 @@ jest.mock('@ungap/structured-clone', () => ({
   __esModule: true,
   default: <T>(value: T): T => JSON.parse(JSON.stringify(value)),
 }));
+
+// Unistyles' native core can't load in Jest. Its mock registers whatever themes the styles lib configures.
+import 'react-native-unistyles/mocks';
+import '@talkpay/shared/ui/styles';

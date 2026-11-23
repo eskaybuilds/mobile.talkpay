@@ -8,11 +8,13 @@ Read this top to bottom once. The concept notes in `../.hermes/learning/` go dee
 ```
 mobile.talkpay/
 ├── apps/talkpay/
-│   ├── app/_layout.tsx, app/index.tsx   Expo Router: the file tree is the navigation tree
+│   ├── app/_layout.tsx, app/index.tsx   Expo Router: the file tree is the navigation tree (routes only, no specs)
+│   ├── index.ts                         entry: configures unistyles, then loads expo-router/entry
+│   ├── project.json                     projectType application, tag type:app (module boundaries need both)
 │   ├── app.config.ts                    the single source of native config (CNG)
 │   ├── eas.json                         build profiles copied from braiding-palace
-│   ├── metro.config.js                  Nx + secure-auth link
-│   └── package.json                     "main": "expo-router/entry"; deps listed as "*"
+│   ├── metro.config.js                  plain Expo config + workspace and secure-auth watch folders
+│   └── package.json                     "main": "index.ts"; deps listed as "*"
 ├── tools/scripts/                       generate-lib.mjs, eas-sync-and-build.mjs, eas-build-post-install.mjs
 ├── eslint.config.mjs + eslint.constraints.json   module-boundary rules
 ├── tsconfig.base.json                   path aliases (@talkpay/...) are added here by the lib generator
@@ -60,6 +62,11 @@ build time. That makes them public: anyone can unzip the app and read them. Real
   was 30.3 while jest-expo 58 brought 30.5. And Expo's lazy globals needed their modules mocked at the SDK 58 path
   (`expo/build/winter/...`). See `apps/talkpay/test-setup.ts`.
 - React Native Testing Library 14 made `render` async.
+- Metro never bundled until the styles lib (2026-11-23). `withNxMetro` moves Metro's `projectRoot` to the workspace
+  root, so Expo looked for `.babelrc.js` and the router's `app/` folder there and found neither. `metro.config.js`
+  now uses the plain Expo config, as braiding-palace does. Check a bundle with
+  `(cd apps/talkpay && npx expo export -p ios)`; tests can't catch this.
+- Expo Router turns every file under `app/` into a route, specs included. Route tests live in `apps/talkpay/__tests__/`.
 
 ## 4. Your steps (you drive)
 
@@ -77,7 +84,8 @@ Then look at:
 - `libs/shared/utils/app-env/project.json`: `name` is the full path and `tags` are `scope:shared`, `type:utils`.
   Where did each value come from in `tools/scripts/generate-lib.mjs`?
 - `tsconfig.base.json`: a new `paths` entry, `@talkpay/shared/utils/app-env`. That alias is how every other lib
-  will import it, and `withNxMetro` teaches Metro the same aliases.
+  will import it. Expo resolves the same aliases for Metro through `apps/talkpay/tsconfig.json`, whose
+  `baseUrl: "../.."` points them at the workspace root.
 - Run `npx nx show project shared/utils/app-env`. Nx inferred `lint` and `test` targets from the files present.
 
 ### B. Make a module-boundary rule fail

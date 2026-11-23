@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 
 export default function HomeRoute() {
   return (
@@ -11,14 +12,15 @@ export default function HomeRoute() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   screen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 24,
-    gap: 8,
+    padding: theme.layout.gutter,
+    gap: theme.space.space2,
+    backgroundColor: theme.colors.background,
   },
-  banner: { fontSize: 20, fontWeight: '700' },
-  body: { fontSize: 16, textAlign: 'center' },
-});
+  banner: { ...theme.type.title2, color: theme.colors.warning },
+  body: { ...theme.type.body, color: theme.colors.textSecondary, textAlign: 'center' },
+}));
