@@ -25,6 +25,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     'expo-router',
+    // Embedded at build time, so text never renders before its font. Families are named in shared/ui/styles tokens.
+    [
+      'expo-font',
+      {
+        fonts: ['Regular', 'Medium', 'SemiBold', 'Bold'].map(
+          (weight) => `../../libs/shared/ui/styles/src/lib/fonts/Inter-${weight}.ttf`,
+        ),
+      },
+    ],
     [
       'expo-splash-screen',
       {
