@@ -1,5 +1,4 @@
 const path = require('path');
-const { withNxMetro } = require('@nx/expo');
 const { getDefaultConfig } = require('@expo/metro-config');
 const { mergeConfig } = require('metro-config');
 
@@ -7,11 +6,14 @@ const projectRoot = __dirname;
 const workspaceRoot = path.resolve(projectRoot, '../..');
 const secureAuthRoot = path.resolve(workspaceRoot, '../secure-auth.talkpay');
 
+// Plain Expo config, not withNxMetro: that moves projectRoot to the workspace root, and Expo then looks for the
+// babel config and the expo-router app/ folder there. Expo resolves the @talkpay/* tsconfig paths itself.
 const defaultConfig = getDefaultConfig(projectRoot);
 const { assetExts, sourceExts } = defaultConfig.resolver;
 
 const customConfig = {
   cacheVersion: 'talkpay',
+  watchFolders: [...new Set([...defaultConfig.watchFolders, workspaceRoot, secureAuthRoot])],
   transformer: {
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
@@ -25,8 +27,4 @@ const customConfig = {
   },
 };
 
-module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
-  debug: false,
-  extensions: [],
-  watchFolders: [secureAuthRoot],
-});
+module.exports = mergeConfig(defaultConfig, customConfig);

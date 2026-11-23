@@ -2,7 +2,7 @@
   "name": "talkpay",
   "version": "0.0.1",
   "private": true,
-  "main": "expo-router/entry",
+  "main": "index.ts",
   "scripts": {
     "start": "dotenv -e ../../.env.development -- expo start --dev-client",
     "start:staging": "dotenv -e ../../.env.staging -- expo start --dev-client",

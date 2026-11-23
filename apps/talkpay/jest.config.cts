@@ -1,6 +1,8 @@
 module.exports = {
   displayName: 'talkpay',
   preset: 'jest-expo',
+  // jest-expo doesn't know tsconfig paths; Nx's resolver maps @talkpay/* to the libs.
+  resolver: '@nx/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
   moduleNameMapper: {

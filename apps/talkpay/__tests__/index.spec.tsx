@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
 
-import HomeRoute from './index';
+import HomeRoute from '../app/index';
 
 describe('HomeRoute', () => {
   it('shows the test-mode banner as a header', async () => {
