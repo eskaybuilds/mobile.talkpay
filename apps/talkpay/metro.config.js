@@ -20,10 +20,14 @@ const customConfig = {
   resolver: {
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
     sourceExts: [...sourceExts, 'cjs', 'mjs', 'svg'],
-    // secure-auth is linked from outside this workspace and has its own node_modules.
-    // Resolving only from ours keeps a single copy of react / react-native in the bundle.
+    // secure-auth is linked from outside this workspace with its own node_modules (its dev tooling). Metro can't see
+    // that folder, so its imports fall through to ours and the bundle keeps one react / react-native. Nested
+    // node_modules elsewhere still resolve: expo needs its own pretty-format 29, not the root's 30.
+    blockList: [
+      ...[defaultConfig.resolver.blockList ?? []].flat(),
+      new RegExp(`${secureAuthRoot.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/node_modules/.*`),
+    ],
     nodeModulesPaths: [path.resolve(workspaceRoot, 'node_modules')],
-    disableHierarchicalLookup: true,
   },
 };
 

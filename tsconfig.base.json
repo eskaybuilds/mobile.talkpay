@@ -25,7 +25,9 @@
     "paths": {
       "@talkpay/shared/utils/app-env": ["./libs/shared/utils/app-env/src/index.ts"],
       "@talkpay/shared/ui/styles": ["./libs/shared/ui/styles/src/index.ts"],
-      "@talkpay/shared/ui/ui-kit": ["./libs/shared/ui/ui-kit/src/index.ts"]
+      "@talkpay/shared/ui/ui-kit": ["./libs/shared/ui/ui-kit/src/index.ts"],
+      "@talkpay/shared/data-access/query": ["./libs/shared/data-access/query/src/index.ts"],
+      "@talkpay/shared/data-access/api-client": ["./libs/shared/data-access/api-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

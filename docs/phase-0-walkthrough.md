@@ -44,8 +44,11 @@ the sibling repo. Two things then go wrong by default, and `metro.config.js` han
 
 1. Metro only watches the project root. `watchFolders: [secureAuthRoot]` lets it see files outside it.
 2. secure-auth has its _own_ `node_modules` with its own `react`. Normal hierarchical lookup would bundle that
-   second copy, and two Reacts crash with "Invalid hook call". `disableHierarchicalLookup` plus `nodeModulesPaths`
-   forces every import to resolve from this workspace's `node_modules`.
+   second copy, and two Reacts crash with "Invalid hook call". `blockList` hides secure-auth's `node_modules` from
+   Metro, so its imports fall through to `nodeModulesPaths` (this workspace's `node_modules`). The scaffold first
+   used `disableHierarchicalLookup` instead, which also hid every _nested_ `node_modules`: expo got the root's
+   `pretty-format` 30 instead of its own 29 and the app crashed at startup with
+   "Cannot read property 'default' of undefined".
    Autolinking (the native side) follows the symlink at prebuild time, so the iOS and Android projects compile
    secure-auth's Swift and Kotlin in. The link isn't _used_ until Phase 2.
 
@@ -122,7 +125,7 @@ Delete `ios/` and `android/` whenever you like. `npm run prebuild` regenerates t
 ## 5. Questions you should be able to answer after this
 
 1. Why can't TalkPay run in Expo Go?
-2. What would break, and how would you notice, if `disableHierarchicalLookup` were removed from `metro.config.js`?
+2. Why does `metro.config.js` block secure-auth's `node_modules` instead of setting `disableHierarchicalLookup`, and what broke when it didn't?
 3. Where does the bundle identifier live, and why is editing `ios/` by hand a mistake here?
 4. What stops a `ui` lib from importing the API client, and why is that a good rule?
 5. Is `EXPO_PUBLIC_API_URL` a secret? Why or why not?
